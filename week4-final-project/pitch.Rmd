@@ -1,18 +1,14 @@
 ---
 title: "Week 4 pitch to the Final Project"
-output: ioslides_presentation
 date: "2024-01-08"
+output:
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
-```{r message=FALSE, warning=FALSE, include=FALSE}
-library(tidyverse)
-library(maps)
-library(mapdata)
-world_coordinates <- map_data("world") 
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introduction
@@ -21,39 +17,39 @@ For this project, I used data from my co-authored PloSone journal article, "Macr
 
 ## Study Area
 Sampling location from the article: \n Macroscale abundance patterns of hydromedusae in the \n temperate Southwestern Atlantic (27°–56° S).
+
 ```{r world map, message=FALSE, warning=FALSE}
 
-rect <- data.frame(
-  lon = c(-69.20, -45.01, -45.01, -69.20),
-  lat = c(-55.10, -55.10, -26.73, -26.73)
-)
+library(tidyverse)
+library(maps)
+library(mapdata)
+world_coordinates <- map_data("world") 
 
-continent_color <- 'bisque3'
+rect <- data.frame(lon = c(-69.20, -45.01, -45.01, -69.20),
+                   lat = c(-55.10, -55.10, -26.73, -26.73))
 
 world_plot <- ggplot() + 
-  geom_map( 
-    data = world_coordinates, map = world_coordinates, 
-    aes(long, lat, map_id = region), color = 'white',
-    fill = continent_color) +
+  geom_map(data = world_coordinates, map = world_coordinates,
+           aes(long, lat, map_id = region), color = 'white', fill = 'bisque3') +
   coord_map("ortho", orientation = c(-50, -50, 0)) +
   scale_y_continuous(breaks = seq(-180, 180, 20)) +
-  geom_polygon(data = rect, aes(lon, lat, group = 1), fill = "dodgerblue3",
-               color = "grey",
-               alpha = .3) +
+  geom_polygon(data = rect, aes(lon, lat, group = 1),
+               fill = "dodgerblue3", color = "grey", alpha = .3) +
   theme(title = element_text(size = 9, color = "grey40"),
         axis.title = element_text(color = 'transparent'),
         axis.text = element_text(color = 'transparent'),
         axis.ticks = element_line(color = 'transparent'),
         panel.grid.major = element_line(linewidth = .9),
-        plot.background = element_rect(color = 'transparent',
-                                       fill = 'transparent'))
+        plot.background = element_rect(color = 'transparent', fill = 'transparent'))
 
+
+```
+
+## Study Area plot
+```{r}
 world_plot
 ```
 
 ## Shiny APP
 Users of this app can see how jellyfish are distributed geographically around the South Western Atlantic Ocean. These data were collected over a period of approximately 40 years.
-
-## Shiny APP
-The species can be chosen via the app's left panel. Two tabs are displayed in the main panel: one tab displays the distribution map, and the other tab contains a summary along with a histogram and descriptive statistics.
-
+The species can be chosen via the app's left panel. In the primary panel of the dashboard, there are three cards that are displayed: a distribution map, a summary, and a histogram.
