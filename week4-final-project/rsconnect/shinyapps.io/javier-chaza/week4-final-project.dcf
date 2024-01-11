@@ -1,0 +1,13 @@
+name: week4-final-project
+title: week4-final-project
+username: javier-chaza
+account: javier-chaza
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10903265
+bundleId: 8131443
+url: https://javier-chaza.shinyapps.io/week4-final-project/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: pitch.html|pitch.Rmd
