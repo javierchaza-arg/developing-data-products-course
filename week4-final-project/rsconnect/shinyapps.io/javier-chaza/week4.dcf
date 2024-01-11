@@ -1,0 +1,12 @@
+name: week4
+title: week4
+username: javier-chaza
+account: javier-chaza
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10883378
+bundleId: 8122199
+url: https://javier-chaza.shinyapps.io/week4/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

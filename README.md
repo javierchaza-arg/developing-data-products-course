@@ -1,2 +1,2 @@
 # developing-data-products-course
-This is the repo for the Coursera course Developing Data Products
+This is the repo for the Coursera Developing Data Products course
