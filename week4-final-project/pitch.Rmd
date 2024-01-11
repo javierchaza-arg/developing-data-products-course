@@ -1,0 +1,59 @@
+---
+title: "Week 4 pitch to the Final Project"
+output: ioslides_presentation
+date: "2024-01-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+library(maps)
+library(mapdata)
+world_coordinates <- map_data("world") 
+```
+
+## Introduction
+
+For this project, I used data from my co-authored PloSone journal article, "Macroscale abundance patterns of hydromedusae in the temperate Southwestern Atlantic (27°–56° S)." Based on a large dataset gathered over about 40 years, the article discusses the distribution of jellyfish throughout the Atlantic Ocean. The article can be found at https://doi.org/10.1371/journal.pone.0217628, and the data are at the SEANOE website: https://www.seanoe.org/data/00501/61229/. The project includes the interactive plots required for the second and third week's assignments, as well as the shiny apps for the fourth week of the Developing Data Products course from Johns Hopkins University
+
+## Study Area
+Sampling location from the article: \n Macroscale abundance patterns of hydromedusae in the \n temperate Southwestern Atlantic (27°–56° S).
+```{r world map, message=FALSE, warning=FALSE}
+
+rect <- data.frame(
+  lon = c(-69.20, -45.01, -45.01, -69.20),
+  lat = c(-55.10, -55.10, -26.73, -26.73)
+)
+
+continent_color <- 'bisque3'
+
+world_plot <- ggplot() + 
+  geom_map( 
+    data = world_coordinates, map = world_coordinates, 
+    aes(long, lat, map_id = region), color = 'white',
+    fill = continent_color) +
+  coord_map("ortho", orientation = c(-50, -50, 0)) +
+  scale_y_continuous(breaks = seq(-180, 180, 20)) +
+  geom_polygon(data = rect, aes(lon, lat, group = 1), fill = "dodgerblue3",
+               color = "grey",
+               alpha = .3) +
+  theme(title = element_text(size = 9, color = "grey40"),
+        axis.title = element_text(color = 'transparent'),
+        axis.text = element_text(color = 'transparent'),
+        axis.ticks = element_line(color = 'transparent'),
+        panel.grid.major = element_line(linewidth = .9),
+        plot.background = element_rect(color = 'transparent',
+                                       fill = 'transparent'))
+
+world_plot
+```
+
+## Shiny APP
+Users of this app can see how jellyfish are distributed geographically around the South Western Atlantic Ocean. These data were collected over a period of approximately 40 years.
+
+## Shiny APP
+The species can be chosen via the app's left panel. Two tabs are displayed in the main panel: one tab displays the distribution map, and the other tab contains a summary along with a histogram and descriptive statistics.
+
