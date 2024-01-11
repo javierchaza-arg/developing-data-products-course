@@ -6,9 +6,8 @@ library(janitor)
 
 # url for data
 # "https://www.seanoe.org/data/00501/61229/data/64809.csv"
-path <- "C:/Users/chaza/Documents/developing-data-products-course/week4-final-project/jellyfish.csv"
 
-df <- read_csv2(path, locale = locale(decimal_mark = ',')) %>%
+df <- read_csv2("jellyfish.csv", locale = locale(decimal_mark = ',')) %>%
   janitor::clean_names() %>% 
   mutate_all(~replace(., . == -9999, NA)) %>% 
   mutate(year = as.Date(as.character(year), format = "%Y"),
